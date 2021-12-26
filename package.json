@@ -2,13 +2,13 @@
 	"name": "brigates-verilog-support",
 	"displayName": "BG_verilog_gen_top_support",
 	"description": "highlight brigates gen_top syntax",
-	"version": "0.0.1",
-	"publisher": "nhf",
+	"version": "0.0.4",
+	"publisher": "windancehf",
 	"private": true,
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Microsoft/vscode-extension-samples"
+		"url": "https://github.com/windance-ee/vscode_ext"
 	},
 	"engines": {
 		"vscode": "^1.42.0"

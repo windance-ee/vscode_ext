@@ -102,9 +102,9 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 							break;
 						case 1:
 							sub_line = line.substring(currentOffset-1,line_len);
-							if(sub_line.search(/\s*(dff)\s+/) != -1) { 
-							// Match 4 char
-								keyword_str = sub_line.match(/(dff)/);
+							if(sub_line.search(/\s*(dff|reg)\s+/) != -1) { 
+							// Match 3 char
+								keyword_str = sub_line.match(/(dff|reg)/);
 								if (keyword_str != null)
 								{
 									openOffset = sub_line.indexOf(keyword_str[0]) + currentOffset - 1;
@@ -127,9 +127,34 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 								});
 								ana_case = 2;
 							}
-							else if(sub_line.search(/\s*(inst|conn|wire)\s+/) != -1) { 
+							else if(sub_line.search(/\s*(inst)\s+/) != -1) { 
+							// Match inst
+								keyword_str = sub_line.match(/(inst)/);
+								if (keyword_str != null)
+								{
+									openOffset = sub_line.indexOf(keyword_str[0]) + currentOffset - 1;
+								}
+								else
+								{
+									openOffset = 0;
+									ana_case = 2;
+									break;
+								}
+								//const openOffset = sub_line.indexOf('inst') + currentOffset - 1;
+								closeOffset = openOffset + 4;
+								currentOffset = closeOffset;
+								r.push({
+									line: i,
+									startCharacter: openOffset,
+									length: 4,
+									tokenType: 'class',
+									tokenModifiers: ['declaration']
+								});
+								ana_case = 2;
+							}
+							else if(sub_line.search(/\s*(conn|wire|comb)\s+/) != -1) { 
 							// Match 4 char
-								keyword_str = sub_line.match(/(inst|conn|wire)/);
+								keyword_str = sub_line.match(/(conn|wire|comb)/);
 								if (keyword_str != null)
 								{
 									openOffset = sub_line.indexOf(keyword_str[0]) + currentOffset - 1;
@@ -152,9 +177,9 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 								});
 								ana_case = 2;
 							}
-							else if(sub_line.search(/\s*(param|direc|input|dffnn)\s+/) != -1) { 
+							else if(sub_line.search(/\s*(param|direc|input|dffnn|dffpn|dffpp|dffnp)\s+/) != -1) { 
 							// Match 5 char
-								keyword_str = sub_line.match(/(param|direc|input|dffnn)/);
+								keyword_str = sub_line.match(/(param|direc|input|dffnn|dffpn|dffpp|dffnp)/);
 								if (keyword_str != null)
 								{
 									openOffset = sub_line.indexOf(keyword_str[0]) + currentOffset - 1;
