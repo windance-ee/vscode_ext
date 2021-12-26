@@ -2,7 +2,7 @@
 	"name": "brigates-verilog-support",
 	"displayName": "BG_verilog_gen_top_support",
 	"description": "highlight brigates gen_top syntax",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"publisher": "windancehf",
 	"private": true,
 	"license": "MIT",

@@ -102,7 +102,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 							break;
 						case 1:
 							sub_line = line.substring(currentOffset-1,line_len);
-							if(sub_line.search(/\s*(dff|reg)\s+/) != -1) { 
+							if(sub_line.search(/^\s*(dff|reg)\s+/) != -1) { 
 							// Match 3 char
 								keyword_str = sub_line.match(/(dff|reg)/);
 								if (keyword_str != null)
@@ -127,7 +127,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 								});
 								ana_case = 2;
 							}
-							else if(sub_line.search(/\s*(inst)\s+/) != -1) { 
+							else if(sub_line.search(/^\s*(inst)\s+/) != -1) { 
 							// Match inst
 								keyword_str = sub_line.match(/(inst)/);
 								if (keyword_str != null)
@@ -152,7 +152,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 								});
 								ana_case = 2;
 							}
-							else if(sub_line.search(/\s*(conn|wire|comb)\s+/) != -1) { 
+							else if(sub_line.search(/^\s*(conn|wire|comb)\s+/) != -1) { 
 							// Match 4 char
 								keyword_str = sub_line.match(/(conn|wire|comb)/);
 								if (keyword_str != null)
@@ -177,7 +177,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 								});
 								ana_case = 2;
 							}
-							else if(sub_line.search(/\s*(param|direc|input|dffnn|dffpn|dffpp|dffnp)\s+/) != -1) { 
+							else if(sub_line.search(/^\s*(param|direc|input|dffnn|dffpn|dffpp|dffnp)\s+/) != -1) { 
 							// Match 5 char
 								keyword_str = sub_line.match(/(param|direc|input|dffnn|dffpn|dffpp|dffnp)/);
 								if (keyword_str != null)
@@ -202,7 +202,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 								});
 								ana_case = 2;
 							}
-							else if(sub_line.search(/\s*(output|assign)\s+/) != -1) { 
+							else if(sub_line.search(/^\s*(output|assign)\s+/) != -1) { 
 							// Match 6 char
 								keyword_str = sub_line.match(/(output|assign)/);
 								if (keyword_str != null)
@@ -227,7 +227,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 								});
 								ana_case = 2;
 							}
-							else if(sub_line.search(/\s*(python)\s+(start|end)\s*$/) != -1) { 
+							else if(sub_line.search(/^\s*(python)\s+(start|end)\s*$/) != -1) { 
 							// Match python
 								if(sub_line.search(/(start)/) != -1) { 
 								// Match start
@@ -276,7 +276,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 								else { 
 								// Match // brigates 
 									openOffset = line.indexOf('brigates');
-									closeOffset = openOffset + 8;
+									closeOffset = openOffset + 9;
 									currentOffset = closeOffset;
 									r.push({
 										line: i,
@@ -303,7 +303,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 					switch(ana_case){
 						case 1:
 							sub_line = line.substring(currentOffset-1,line_len);
-							if(sub_line.search(/\s*(protect)\s+(start|end)\s*$/) != -1) { 
+							if(sub_line.search(/^\s*(protect)\s+(start|end)\s*$/) != -1) { 
 							// Match python
 								if(sub_line.search(/(start)/) != -1) { 
 								// Match start
@@ -350,7 +350,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 								else { 
 								// Match // brigates 
 									openOffset = line.indexOf('brigates');
-									closeOffset = openOffset + 8;
+									closeOffset = openOffset + 9;
 									currentOffset = closeOffset;
 									r.push({
 										line: i,
