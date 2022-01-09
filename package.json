@@ -2,7 +2,7 @@
 	"name": "brigates-verilog-support",
 	"displayName": "BG_verilog_gen_top_support",
 	"description": "highlight brigates gen_top syntax",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"publisher": "windancehf",
 	"private": true,
 	"license": "MIT",
@@ -28,8 +28,23 @@
 					".v"
 				]
 			}
+		],
+		"semanticTokenScopes": [
+		  {
+			"language": "verilog",
+			"scopes": {
+			  "keyword.gentop": ["keyword.other.verilog"],
+			  "inst.gentop": ["entity.name.type.module.verilog"],
+			  "text.gentop": ["meta"]
+			}
+		  }
 		]
 	},
+  	"configurationDefaults": {
+  	  	"verilog": {
+  	  	  	"editor.semanticHighlighting.enabled": true
+  	  	}
+  	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",

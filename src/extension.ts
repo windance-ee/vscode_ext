@@ -7,13 +7,14 @@ const legend = (function () {
 	const tokenTypesLegend = [
 		'comment', 'string', 'keyword', 'number', 'regexp', 'operator', 'namespace',
 		'type', 'struct', 'class', 'interface', 'enum', 'typeParameter', 'function',
-		'method', 'decorator', 'macro', 'variable', 'parameter', 'property', 'label'
+		'method', 'decorator', 'macro', 'variable', 'parameter', 'property', 'label', 
+		'brigates','text','inst'
 	];
 	tokenTypesLegend.forEach((tokenType, index) => tokenTypes.set(tokenType, index));
 
 	const tokenModifiersLegend = [
 		'declaration', 'documentation', 'readonly', 'static', 'abstract', 'deprecated',
-		'modification', 'async'
+		'modification', 'async', 'gentop'
 	];
 	tokenModifiersLegend.forEach((tokenModifier, index) => tokenModifiers.set(tokenModifier, index));
 
@@ -122,8 +123,8 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 									line: i,
 									startCharacter: openOffset,
 									length: 4,
-									tokenType: 'macro',
-									tokenModifiers: ['declaration']
+									tokenType: 'keyword',
+									tokenModifiers: ['gentop']
 								});
 								ana_case = 2;
 							}
@@ -147,8 +148,8 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 									line: i,
 									startCharacter: openOffset,
 									length: 4,
-									tokenType: 'class',
-									tokenModifiers: ['declaration']
+									tokenType: 'inst',
+									tokenModifiers: ['gentop']
 								});
 								ana_case = 2;
 							}
@@ -172,8 +173,8 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 									line: i,
 									startCharacter: openOffset,
 									length: 4,
-									tokenType: 'macro',
-									tokenModifiers: ['declaration']
+									tokenType: 'keyword',
+									tokenModifiers: ['gentop']
 								});
 								ana_case = 2;
 							}
@@ -197,8 +198,8 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 									line: i,
 									startCharacter: openOffset,
 									length: 5,
-									tokenType: 'macro',
-									tokenModifiers: ['declaration']
+									tokenType: 'keyword',
+									tokenModifiers: ['gentop']
 								});
 								ana_case = 2;
 							}
@@ -222,8 +223,8 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 									line: i,
 									startCharacter: openOffset,
 									length: 6,
-									tokenType: 'macro',
-									tokenModifiers: ['declaration']
+									tokenType: 'keyword',
+									tokenModifiers: ['gentop']
 								});
 								ana_case = 2;
 							}
@@ -231,20 +232,20 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 							// Match python
 								if(sub_line.search(/(start)/) != -1) { 
 								// Match start
-									r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'operator',tokenModifiers: ['async']});
+									r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'text',tokenModifiers: ['gentop']});
 									python_pair = r.length;
 								}
 								else{ 
 								// Match end
 									if(python_pair != 0)
 									{
-										r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'macro',tokenModifiers: ['modification']});
-										r[python_pair-1].tokenType = 'macro'
+										r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'keyword',tokenModifiers: ['gentop']});
+										r[python_pair-1].tokenType = 'keyword'
 										python_pair = 0;
 									}
 									else
 									{
-										r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'operator',tokenModifiers: ['deprecated']});
+										r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'text',tokenModifiers: ['gentop']});
 									}
 								}
 
@@ -258,8 +259,8 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 									line: i,
 									startCharacter: openOffset,
 									length: line_len-openOffset,
-									tokenType: 'function',
-									tokenModifiers: ['declaration']
+									tokenType: 'text',
+									tokenModifiers: ['gentop']
 								});
 								line_end = 1;
 
@@ -307,20 +308,20 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 							// Match python
 								if(sub_line.search(/(start)/) != -1) { 
 								// Match start
-									r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'operator',tokenModifiers: ['async']});
+									r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'text',tokenModifiers: ['gentop']});
 									python_pair = r.length;
 								}
 								else{ 
 								// Match end
 									if(python_pair != 0)
 									{
-										r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'macro',tokenModifiers: ['modification']});
-										r[python_pair-1].tokenType = 'macro'
+										r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'keyword',tokenModifiers: ['gentop']});
+										r[python_pair-1].tokenType = 'keyword'
 										python_pair = 0;
 									}
 									else
 									{
-										r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'operator',tokenModifiers: ['deprecated']});
+										r.push({line: i,startCharacter: currentOffset,length: sub_line.length,tokenType: 'text',tokenModifiers: ['gentop']});
 									}
 								}
 
@@ -335,7 +336,7 @@ class DocumentSemanticTokensProvider implements vscode.DocumentSemanticTokensPro
 									startCharacter: openOffset,
 									length: line_len-openOffset,
 									tokenType: 'function',
-									tokenModifiers: ['declaration']
+									tokenModifiers: ['gentop']
 								});
 								line_end = 1;
 
